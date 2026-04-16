@@ -44,7 +44,7 @@ public class Main {
         }
     }
 
-    private static int showMenu() {
+    private static int showMenu() { //Arreglos en este metodo
         while (true) {
             String menu = """
                     SISTEMA DE INVENTARIO
