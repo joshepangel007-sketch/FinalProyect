@@ -31,7 +31,7 @@ public class ProductDAO {
             
             while (rs.next()) {
                 Product p = new Product();
-                p.setId(rs.getInt("id"));
+                p.setId(rs.getInt("id_products"));
                 p.setName(rs.getString("name"));
                 p.setPrice(rs.getDouble("price"));
                 p.setQuantity(rs.getInt("quantity"));
@@ -43,7 +43,7 @@ public class ProductDAO {
     }
     
     public Product getProductById(int id) throws SQLException {
-        String sql = "SELECT * FROM products WHERE id = ?";
+        String sql = "SELECT * FROM products WHERE id_products = ?";
         
         try (Connection conn = db.ConnectionDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -53,7 +53,7 @@ public class ProductDAO {
             
             if (rs.next()) {
                 Product p = new Product();
-                p.setId(rs.getInt("id"));
+                p.setId(rs.getInt("id_products"));
                 p.setName(rs.getString("name"));
                 p.setPrice(rs.getDouble("price"));
                 p.setQuantity(rs.getInt("quantity"));
@@ -65,7 +65,7 @@ public class ProductDAO {
     }
     
     public void updateProduct(Product product) throws SQLException {
-        String sql = "UPDATE products SET name = ?, price = ?, quantity = ?, category = ? WHERE id = ?";
+        String sql = "UPDATE products SET name = ?, price = ?, quantity = ?, category = ? WHERE id_products = ?";
         
         try (Connection conn = db.ConnectionDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -80,7 +80,7 @@ public class ProductDAO {
     }
     
     public void deleteProduct(int id) throws SQLException {
-        String sql = "DELETE FROM products WHERE id = ?";
+        String sql = "DELETE FROM products WHERE id_products = ?";
         
         try (Connection conn = db.ConnectionDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

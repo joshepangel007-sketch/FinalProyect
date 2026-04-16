@@ -116,7 +116,7 @@ public class Main {
         JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente");
     }
 
-    private static void deleteProduct() throws SQLException {
+    private static void deleteProduct() throws SQLException {//Metodo para borrar registros
         int id = Integer.parseInt(JOptionPane.showInputDialog("ID del producto a eliminar:"));
 
         productService.deleteProduct(id);
