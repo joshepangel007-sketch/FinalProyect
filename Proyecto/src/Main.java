@@ -2,46 +2,48 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 import db.ConnectionDB;
 
 public class Main {
+
+  private static int showMenu() { // Metodo para mostrar el menu luego en el main
+    String menu = """
+        SISTEMA DE INVENTARIO
+        1. Crear producto
+        2. Listar productos
+        3. Buscar producto por ID
+        4. Actualizar producto
+        5. Eliminar producto
+        6. Salir
+        """; // Variable para mostrar el menu
+    String input = JOptionPane.showInputDialog(menu + "\nSeleccione una opción:");
+    return Integer.parseInt(input);
+  }
+
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
-
     // Pedimos usuario y contraseña al iniciar la app
-    System.out.print("Usuario: ");
-    String user = scanner.nextLine();
-
-    System.out.print("Contraseña: ");
-    String password = scanner.nextLine();
+    String user = JOptionPane.showInputDialog("Usuario:");
+    String password = JOptionPane.showInputDialog("Contraseña:");
 
     // Intentamos conectarnos con las credenciales ingresadas
     try {
       Connection conn = ConnectionDB.getConnection(user, password);
-      System.out.println("Conexión exitosa! Bienvenido " + user);
       conn.close();
+      JOptionPane.showMessageDialog(null, "Conexión exitosa! Bienvenido " + user);
     } catch (SQLException e) {
-      System.out.println("Usuario o contraseña incorrectos");
+      JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
       return; // Salimos si no hay conexion
     }
 
     // Menu principal
     int opcion = 0;
     while (opcion != 6) {
-      System.out.println("\n=== Sistema de Inventario ===");
-      System.out.println("1. Crear producto");
-      System.out.println("2. Listar productos");
-      System.out.println("3. Buscar producto por ID");
-      System.out.println("4. Actualizar producto");
-      System.out.println("5. Eliminar producto");
-      System.out.println("6. Salir");
-      System.out.print("Opcion: ");
-      opcion = scanner.nextInt();
+      opcion = showMenu();
     }
 
-    System.out.println("Hasta luego!");
-    scanner.close();
+    JOptionPane.showMessageDialog(null, "Hasta luego!");
   }
 }
