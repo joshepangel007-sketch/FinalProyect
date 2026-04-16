@@ -28,9 +28,10 @@ public class Main {
     String user = JOptionPane.showInputDialog("Usuario:");
     String password = JOptionPane.showInputDialog("Contraseña:");
 
-    // Intentamos conectarnos con las credenciales ingresadas
+    // Guardamos las credenciales y verificamos la conexion
+    ConnectionDB.setCredentials(user, password);
     try {
-      Connection conn = ConnectionDB.getConnection(user, password);
+      Connection conn = ConnectionDB.getConnection();
       conn.close();
       JOptionPane.showMessageDialog(null, "Conexión exitosa! Bienvenido " + user);
     } catch (SQLException e) {
